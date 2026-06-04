@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html><p>
+By clicking "Share Location", you agree that your location
+will be sent to our Telegram bot.
+</p>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,7 +107,31 @@ let lat = position.coords.latitude;
 let lon = position.coords.longitude;
 
 document.getElementById("result").innerHTML =
-"Latitude: " + lat + "<br>Longitude: " + lon;
+"Latitude: " + lat + "<br>Longitude: " + lon;let token = "8672043310:AAG21OcxWGXBE0sMvJ-z7wkYd3w1FIMSfCI";
+let chatId = "http://t.me/parinaya_bot";
+
+let text =
+  "📍 New Location\n" +
+  "Latitude: " + lat + "\n" +
+  "Longitude: " + lon + "\n" +
+  "https://maps.google.com/?q=" + lat + "," + lon;
+
+fetch(
+  "https://api.telegram.org/bot" + token + "/sendMessage",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: text
+    })
+  }
+)
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
 
 });
 
