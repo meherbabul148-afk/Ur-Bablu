@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Location Share</title>
+</head>
+<body>
+
+<h2>Location Share Demo</h2>
+<p>Button dabakar apni location share karein.</p>
+
+<button onclick="getLocation()">Share Location</button>
+
+<p id="result"></p>
+
+<script>
+function getLocation() {
+
+  if (!navigator.geolocation) {
+    document.getElementById("result").innerHTML =
+      "Geolocation supported nahi hai.";
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+
+      document.getElementById("result").innerHTML =
+        "Latitude: " + lat +
+        "<br>Longitude: " + lon;
+
+    },
+    function(error) {
+      document.getElementById("result").innerHTML =
+        "Location permission deny ho gayi.";
+    }
+  );
+}
+</script>
+
+</body>
+</html>
